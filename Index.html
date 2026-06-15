@@ -540,9 +540,8 @@ footer{background:var(--forest);border-top:1px solid rgba(201,168,76,.15);paddin
       <a href="mailto:hello@hwookwellness.com" style="font-family:'Inconsolata',monospace;font-size:15px;letter-spacing:2px;color:var(--moss);text-decoration:none;font-weight:600;">hello@hwookwellness.com</a>
     </div>
     <!-- Netlify form — simple POST, no JavaScript dependency -->
-    <form class="wl-form" name="waitlist" method="POST" action="/success" netlify netlify-honeypot="bot-field">
+    <form class="wl-form" name="waitlist" method="POST" action="/success" netlify>
       <input type="hidden" name="form-name" value="waitlist">
-      <input type="hidden" name="bot-field">
       <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
       <button type="submit">NOTIFY ME</button>
     </form>
