@@ -542,7 +542,7 @@ footer{background:var(--forest);border-top:1px solid rgba(201,168,76,.15);paddin
     <!-- Netlify form — simple POST, no JavaScript dependency -->
     <form class="wl-form" name="waitlist" method="POST" action="/success" netlify netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="waitlist">
-      <input type="text" name="bot-field" style="position:absolute;left:-9999px;opacity:0;" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="bot-field">
       <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
       <button type="submit">NOTIFY ME</button>
     </form>
