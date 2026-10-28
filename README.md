@@ -2,7 +2,7 @@
 
 **Status:** Early-stage — landing page and waitlist infrastructure live; product in development.
 
-HWOOK Wellness is an early-stage venture by [Kinecia Wheeler](https://linkedin.com/in/kinecia-wheeler), founder of [CollectIQ Technologies](https://github.com/TryCollectIQ/collectiq). This repository holds the initial web presence and lead-capture flow for the venture.
+HWOOK Wellness is an early-stage venture by [Kinecia Wheeler](https://www.linkedin.com/in/kineciawheeler), founder of [CollectIQ Technologies](https://trycollectiq.com). This repository holds the initial web presence and lead-capture flow for the venture.
 
 ## What's in this repository
 
@@ -13,7 +13,7 @@ HWOOK Wellness is an early-stage venture by [Kinecia Wheeler](https://linkedin.c
 
 ## Why it's minimal right now
 
-This is an intentionally lightweight, single-page deployment pattern — the same lean approach used to validate CollectIQ's earliest positioning before scaling into a full application. The goal at this stage is to test demand and messaging before investing in product infrastructure, not to under-build; the full HWOOK Wellness platform will follow the same architecture discipline visible in the [CollectIQ repository](https://github.com/TryCollectIQ/collectiq) once development begins in earnest.
+This is an intentionally lightweight, single-page deployment pattern — the same lean approach used to validate CollectIQ's earliest positioning before scaling into a full application. The goal at this stage is to test demand and messaging before investing in product infrastructure, not to under-build; the full HWOOK Wellness platform will follow the same architecture discipline used for CollectIQ once development begins in earnest.
 
 ## Deployment
 
