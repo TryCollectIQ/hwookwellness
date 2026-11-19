@@ -178,6 +178,41 @@ footer h3{font-size:.95rem;margin-bottom:8px}
 footer a{color:var(--ink-soft);display:block;padding-block:4px}
 footer .legal{margin-top:26px;max-width:80ch}
 
+/* ---- Home page bottle story: four chapters that play over a 3D bottle ---- */
+.hero.story{position:relative;padding-block:0;background:var(--tile);overflow:hidden;display:flex;align-items:center;min-height:min(84svh,760px)}
+.story-stage{position:absolute;inset:0}
+.story-stage canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .7s;touch-action:pan-y;cursor:grab}
+.story-stage canvas:active{cursor:grabbing}
+.story-stage.is-3d canvas{opacity:1}
+.story-photo{position:absolute;right:max(6%,calc(50% - 470px));top:50%;translate:0 -50%;height:82%;width:auto;border-radius:6px;transition:opacity .5s}
+.story-stage.is-3d .story-photo{opacity:0;pointer-events:none}
+.story-copy{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;gap:18px;padding-block:56px;pointer-events:none}
+.story-copy>*{max-width:min(47%,500px);pointer-events:auto}
+.story-copy h1{min-height:2.3em}
+.story-copy h1 em{display:inline}
+.story-copy #st-d{font-size:1.08rem;min-height:6.4em}
+.story-bars{display:flex;gap:6px}
+.story-bars button{all:unset;cursor:pointer;width:54px;height:40px;position:relative}
+.story-bars button::before,.story-bars button::after{content:"";position:absolute;left:0;right:0;top:18px;height:3px;border-radius:2px;background:var(--line)}
+.story-bars button::after{background:var(--green);transform-origin:left;transform:scaleX(var(--f,0))}
+.story-bars button:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:4px}
+.story-now{position:absolute;left:70%;translate:-50% 0;bottom:38px;white-space:nowrap;font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--green);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 18px;pointer-events:none}
+.story-now:empty{display:none}
+.story-note{position:absolute;right:16px;bottom:10px;font-size:.74rem;color:var(--ink-soft);pointer-events:none;opacity:0;transition:opacity .5s}
+.story-stage.is-3d .story-note{opacity:1}
+@media (max-width:820px){
+  .hero.story{display:grid;grid-template-columns:minmax(0,1fr);min-height:0;padding-block:28px 34px;row-gap:14px}
+  .story-copy{display:contents}
+  .story-copy>*{max-width:none;margin-inline:20px}
+  .story-stage{position:relative;inset:auto;order:1;height:max(300px,40svh)}
+  .story-bars{order:2}
+  .story-copy #st-d{order:3;font-size:1rem;min-height:6.5em}
+  .story-copy .cta-row{order:4}
+  .story-photo{right:auto;left:50%;translate:-50% -50%;height:94%}
+  .story-now{left:50%;bottom:6px;font-size:1rem}
+  .story-note{display:none}
+}
+
 /* ---- 3D bottle stage, motion and the rinse planner ---- */
 .stage-wrap{display:flex;flex-direction:column;gap:12px;min-width:0}
 .tile.stage{position:relative}
@@ -240,30 +275,24 @@ button.stage-swap{right:12px;bottom:12px;cursor:pointer;min-height:32px;display:
 
 <!-- ============ HOME ============ -->
 <div class="view" id="home">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="stack" style="gap:20px">
-        <p class="eyebrow">Concentrated botanical mouthwash</p>
-        <h1>Fresh breath that <em>doesn't burn.</em></h1>
-        <p class="soft" style="font-size:1.08rem;max-width:56ch">A month of mouthwash in a 30&nbsp;mL amber glass dropper. One dropperful, a splash of water, swish and spit. Cool and clean, with no alcohol sting.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#mouthwash">Shop the mouthwash</a>
-          <a class="btn btn-line" href="#toothpaste">See what's next</a>
-        </div>
+  <section class="hero story" id="story" aria-label="The HWOOK mouthwash bottle">
+    <div class="wrap story-copy">
+      <p class="eyebrow">Concentrated botanical mouthwash</p>
+      <h1 id="st-t">Fresh breath that <em>doesn't burn.</em></h1>
+      <p class="soft" id="st-d">A month of mouthwash in a 30&nbsp;mL amber glass dropper. One dropperful, a splash of water, swish and spit. Cool and clean, with no alcohol sting.</p>
+      <nav class="story-bars" id="st-bars" aria-label="Bottle story">
+        <button type="button" aria-label="The bottle" aria-current="step"></button><button type="button" aria-label="What goes in"></button><button type="button" aria-label="One dropperful per rinse"></button><button type="button" aria-label="A month in one bottle"></button>
+      </nav>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#mouthwash">Shop the mouthwash</a>
+        <a class="btn btn-line" href="#toothpaste">See what's next</a>
       </div>
-      <div class="stage-wrap">
-        <div class="tile stage" data-photo data-3d="on">
-          <svg viewBox="0 0 220 272" width="230" height="284" aria-hidden="true"><use href="#art-bottle"/></svg>
-        </div>
-        <div class="stage-ui" id="stage-ui" hidden>
-          <div class="chips" role="group" aria-label="Turn the bottle">
-            <button class="chip" type="button" data-view="front" aria-pressed="true">Front</button>
-            <button class="chip" type="button" data-view="back" aria-pressed="false">Back</button>
-            <button class="chip" type="button" data-view="dropper" aria-pressed="false">Dropper</button>
-          </div>
-          <p class="stage-cap" id="stage-cap" aria-live="polite"></p>
-        </div>
-      </div>
+    </div>
+    <div class="story-stage" id="st-stage">
+      <img class="story-photo" src="bottle.png" width="880" height="1168" alt="HWOOK Concentrated Botanical Mouthwash in a 1 fl oz amber glass dropper bottle">
+      <canvas id="st-cv" role="img" aria-label="3D view of the HWOOK amber glass dropper bottle. Drag sideways to turn it."></canvas>
+      <p class="story-now" id="st-now" aria-live="polite"></p>
+      <p class="story-note">3D illustration. Leaves and berries stand in for the extracts.</p>
     </div>
   </section>
 
@@ -994,5 +1023,6 @@ var STORE = {
   }
 })();
 </script>
+<script src="story.js" defer></script>
 </body>
 </html>
