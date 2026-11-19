@@ -213,6 +213,11 @@ footer .legal{margin-top:26px;max-width:80ch}
   .story-note{display:none}
 }
 
+.pocket{margin-top:40px}
+.pocket-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 32px}
+.pocket-grid>div{border-top:1px solid var(--gold-soft);padding-top:16px}
+.pocket-grid h3{color:var(--band-ink);font-size:1.2rem;margin-bottom:6px}
+
 /* ---- 3D bottle stage, motion and the rinse planner ---- */
 .stage-wrap{display:flex;flex-direction:column;gap:12px;min-width:0}
 .tile.stage{position:relative}
@@ -281,7 +286,7 @@ button.stage-swap{right:12px;bottom:12px;cursor:pointer;min-height:32px;display:
       <h1 id="st-t">Fresh breath that <em>doesn't burn.</em></h1>
       <p class="soft" id="st-d">A month of mouthwash in a 30&nbsp;mL amber glass dropper. One dropperful, a splash of water, swish and spit. Cool and clean, with no alcohol sting.</p>
       <nav class="story-bars" id="st-bars" aria-label="Bottle story">
-        <button type="button" aria-label="The bottle" aria-current="step"></button><button type="button" aria-label="What goes in"></button><button type="button" aria-label="One dropperful per rinse"></button><button type="button" aria-label="A month in one bottle"></button>
+        <button type="button" aria-label="The bottle" aria-current="step"></button><button type="button" aria-label="What goes in"></button><button type="button" aria-label="One dropperful per rinse"></button><button type="button" aria-label="Fits in your pocket"></button>
       </nav>
       <div class="cta-row">
         <a class="btn btn-primary" href="#mouthwash">Shop the mouthwash</a>
@@ -300,10 +305,26 @@ button.stage-swap{right:12px;bottom:12px;cursor:pointer;min-height:32px;display:
     <div class="trust">
       <div><strong>Alcohol-free</strong>No sting, no dried-out feeling</div>
       <div><strong>Sugar-free · 100% vegan</strong>Sweetened with xylitol</div>
-      <div><strong>≈30 rinses a bottle</strong>Up to 1 month</div>
+      <div><strong>Pocket-size</strong>1 fl oz · about 30 rinses</div>
       <div><strong>30-day guarantee</strong>Planned for launch</div>
     </div>
   </div>
+
+
+  <section class="band pocket" aria-labelledby="pocket-h">
+    <div class="wrap stack" style="gap:26px">
+      <div class="stack" style="gap:10px">
+        <h2 id="pocket-h">Mouthwash that fits in your pocket.</h2>
+        <p style="max-width:54ch;font-size:1.05rem">The big bottle stays by the sink. This one goes where you go, so fresh breath is ready right after lunch, not hours later when you get home.</p>
+      </div>
+      <div class="pocket-grid">
+        <div><h3>After lunch</h3><p>Onion on the sandwich? A few drops on your tongue, a quick swish in the restroom, spit, and you're back at your desk.</p></div>
+        <div><h3>Before you walk in</h3><p>The meeting, the interview, the date. Thirty seconds in the car or the hallway and you're ready to talk up close.</p></div>
+        <div><h3>On the road</h3><p>At 1&nbsp;fl&nbsp;oz it sits under the 3.4&nbsp;oz carry-on liquid limit, and it tucks into a coat pocket or a toiletry bag.</p></div>
+      </div>
+      <div class="cta-row"><a class="btn btn-gold" href="#mouthwash">Get your pocket bottle</a></div>
+    </div>
+  </section>
 
   <section class="block" style="border-top:0">
     <div class="wrap stack" style="gap:26px">
@@ -377,7 +398,7 @@ button.stage-swap{right:12px;bottom:12px;cursor:pointer;min-height:32px;display:
         <div class="stack" style="gap:8px">
           <p class="eyebrow">Berry · Cool herbal · 1 fl oz (30 mL)</p>
           <h1>Concentrated Botanical Mouthwash</h1>
-          <p class="soft">Fresh breath with no alcohol burn. One dropperful is one rinse, so this small bottle lasts up to a month.</p>
+          <p class="soft">Fresh breath with no alcohol burn, in a bottle small enough for your pocket. Swish after lunch, before a meeting or on the road. One dropperful is one rinse, so it lasts up to a month.</p>
         </div>
         <fieldset>
           <legend>Choose your option</legend>
@@ -392,6 +413,7 @@ button.stage-swap{right:12px;bottom:12px;cursor:pointer;min-height:32px;display:
         <ul class="ticks">
           <li>Alcohol-free, sugar-free, 100% vegan</li>
           <li>No artificial dyes. The pink comes from cranberry</li>
+          <li>Pocket-size 1 fl oz bottle for work, travel and nights out</li>
           <li>Amber glass with a marked 1 mL dropper</li>
           <li>30-day empty-bottle guarantee, planned for launch</li>
         </ul>

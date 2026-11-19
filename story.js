@@ -15,7 +15,7 @@
     ["Fresh breath that <em>doesn't burn.</em>", "A month of mouthwash in a 30&nbsp;mL amber glass dropper. One dropperful, a splash of water, swish and spit. Cool and clean, with no alcohol sting."],
     ["What goes in.", "Plant-derived sweeteners, zinc, green tea, cranberry and cooling menthol. The full ingredient list is on the product page."],
     ["One dropperful per rinse.", "The marked 1&nbsp;mL dropper measures it for you. Add a splash of water, swish for 30 seconds, then spit."],
-    ["A month in one small bottle.", "About 30 rinses in amber glass. Small enough for a shelf, a bag or a carry-on."]
+    ["Pocket-size. Ready after lunch.", "A few drops on your tongue, swish and spit. Fresh breath between meetings, with about 30 rinses in a bottle smaller than your phone."]
   ];
   var NAMES = ["Xylitol and erythritol", "Zinc citrate", "Green tea leaf extract", "Cranberry fruit extract", "Menthol, eucalyptol and thymol"];
   var LEN = [7, 4, 8, 8];
