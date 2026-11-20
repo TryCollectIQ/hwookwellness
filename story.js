@@ -12,10 +12,10 @@
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var CH = [
-    ["Fresh breath that <em>doesn't burn.</em>", "A month of mouthwash in a 30&nbsp;mL amber glass dropper. One dropperful, a splash of water, swish and spit. Cool and clean, with no alcohol sting."],
+    ["Onions at lunch. <em>A meeting at 1:30.</em>", "You reach into your pocket: a few drops, a 30-second swish in the restroom, spit, and you walk in ready to talk up close. HWOOK is a concentrated, alcohol-free mouthwash in a 30&nbsp;mL amber glass dropper, about 30 rinses a bottle. Cool and clean, with no sting."],
     ["What goes in.", "Plant-derived sweeteners, zinc, green tea, cranberry and cooling menthol. The full ingredient list is on the product page."],
     ["One dropperful per rinse.", "The marked 1&nbsp;mL dropper measures it for you. Add a splash of water, swish for 30 seconds, then spit."],
-    ["Pocket-size. Ready after lunch.", "A few drops on your tongue, swish and spit. Fresh breath between meetings, with about 30 rinses in a bottle smaller than your phone."]
+    ["Fits in your pocket.", "Smaller than your phone and under the 3.4&nbsp;oz carry-on liquid limit, so fresh breath goes where you go."]
   ];
   var NAMES = ["Xylitol and erythritol", "Zinc citrate", "Green tea leaf extract", "Cranberry fruit extract", "Menthol, eucalyptol and thymol"];
   var LEN = [7, 4, 8, 8];
