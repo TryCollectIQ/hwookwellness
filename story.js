@@ -21,7 +21,7 @@
   var LEN = [7, 4, 8, 8];
   var BASE = 0.3, STEP = 0.14, N = 28, GAP = 0.042, POUR = 3.1;
 
-  var st = { yaw: -0.12, yawT: -0.12, pitch: 0.1, pitchT: 0.1, drag: false, reveal: still ? 1 : 0, level: 1, levelT: 1, out: 0, outT: 0, cur: -1, t0: 0, queue: [], done: 5, ch: 0, chT: 0, zoom: 1, lift: 0 };
+  var st = { yaw: -0.12, yawT: -0.12, pitch: 0.1, pitchT: 0.1, drag: false, reveal: still ? 1 : 0, level: 1, levelT: 1, out: 0, outT: 0, cur: -1, t0: 0, queue: [], done: 5, ch: 0, chT: 0, zoom: 1, lift: 0, pk: 0 };
   var bars = Array.prototype.slice.call(document.querySelectorAll("#st-bars button"));
   var fullLiquid = function () {};
   var has3d = false;
@@ -76,7 +76,7 @@
     var etex = new THREE.CanvasTexture(ec); etex.mapping = THREE.EquirectangularReflectionMapping; etex.colorSpace = THREE.SRGBColorSpace;
     var pm = new THREE.PMREMGenerator(renderer); scene.environment = pm.fromEquirectangular(etex).texture; pm.dispose();
     var key = new THREE.DirectionalLight(0xfff1d6, dark ? 1.6 : 1.3); key.position.set(-6, 12, 8); key.castShadow = true;
-    key.shadow.mapSize.set(1024, 1024); key.shadow.camera.left = -6; key.shadow.camera.right = 6; key.shadow.camera.top = 12; key.shadow.camera.bottom = -2; key.shadow.radius = 6; key.shadow.bias = -0.0008; scene.add(key);
+    key.shadow.mapSize.set(1024, 1024); key.shadow.camera.left = -6; key.shadow.camera.right = 12; key.shadow.camera.top = 16; key.shadow.camera.bottom = -2; key.shadow.radius = 6; key.shadow.bias = -0.0008; scene.add(key);
 
     scene.add(new THREE.HemisphereLight(0xffffff, 0xe6dccb, dark ? 0.25 : 0.7));
     var root = new THREE.Group(); scene.add(root);
@@ -131,6 +131,35 @@
     var pipette = new THREE.Mesh(lathe([[0.25, 5.6], [0.25, 1.7], [0.21, 1.35], [0.11, 1.0], [0.075, 0.8], [0.05, 0.8], [0.09, 1.0], [0.18, 1.35], [0.2, 1.7], [0.2, 5.6]], 28), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transmission: 1, thickness: 0.12, ior: 1.5, roughness: 0.03, envMapIntensity: 0.7, side: THREE.DoubleSide }));
     pipette.renderOrder = 3;
     dropper.add(collar, bulb, pipette); collar.castShadow = true; bulb.castShadow = true;
+
+
+    /* Chapter 4's proof: a phone at true scale beside the bottle (1 unit = 1 cm; the bottle is 3.2 cm across,
+       the phone 14.8 x 7.2 cm). Its lock screen picks up the hero story: 1:27, meeting at 1:30. */
+    var PW = 7.16, PH = 14.76, PD = 0.78, PR = 1.1;
+    var rr = new THREE.Shape(); rr.moveTo(-PW / 2 + PR, -PH / 2); rr.lineTo(PW / 2 - PR, -PH / 2); rr.quadraticCurveTo(PW / 2, -PH / 2, PW / 2, -PH / 2 + PR); rr.lineTo(PW / 2, PH / 2 - PR); rr.quadraticCurveTo(PW / 2, PH / 2, PW / 2 - PR, PH / 2); rr.lineTo(-PW / 2 + PR, PH / 2); rr.quadraticCurveTo(-PW / 2, PH / 2, -PW / 2, PH / 2 - PR); rr.lineTo(-PW / 2, -PH / 2 + PR); rr.quadraticCurveTo(-PW / 2, -PH / 2, -PW / 2 + PR, -PH / 2);
+    var pgeo = new THREE.ExtrudeGeometry(rr, { depth: PD - 0.12, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 3, curveSegments: 10 }); pgeo.translate(0, 0, -(PD - 0.12) / 2);
+    var phone = new THREE.Group(); scene.add(phone);
+    var pbody = new THREE.Mesh(pgeo, new THREE.MeshStandardMaterial({ color: 0x2b2f2c, roughness: 0.35, metalness: 0.6, envMapIntensity: 0.9 })); pbody.castShadow = true; phone.add(pbody);
+    var sc = document.createElement("canvas"); sc.width = 512; sc.height = 1056; var sx = sc.getContext("2d");
+    var drawScreen = function () {
+      var g = sx.createLinearGradient(0, 0, 0, 1056); g.addColorStop(0, "#1A3A2A"); g.addColorStop(1, "#0b1a12");
+      sx.clearRect(0, 0, 512, 1056); sx.save(); sx.beginPath(); if (sx.roundRect) sx.roundRect(0, 0, 512, 1056, 62); else sx.rect(0, 0, 512, 1056); sx.clip();
+      sx.fillStyle = g; sx.fillRect(0, 0, 512, 1056);
+      sx.fillStyle = "#000"; if (sx.roundRect) { sx.beginPath(); sx.roundRect(196, 26, 120, 34, 17); sx.fill(); }
+      sx.fillStyle = "rgba(255,255,255,.75)"; sx.textAlign = "center"; sx.font = "500 30px Inter, system-ui, sans-serif"; sx.fillText("Tuesday", 256, 170);
+      sx.fillStyle = "#fff"; sx.font = "600 150px Inter, system-ui, sans-serif"; sx.fillText("1:27", 256, 310);
+      sx.fillStyle = "rgba(255,255,255,.16)"; if (sx.roundRect) { sx.beginPath(); sx.roundRect(34, 400, 444, 128, 28); sx.fill(); } else sx.fillRect(34, 400, 444, 128);
+      sx.textAlign = "left"; sx.fillStyle = "rgba(255,255,255,.7)"; sx.font = "500 24px Inter, system-ui, sans-serif"; sx.fillText("CALENDAR · in 3 min", 62, 448);
+      sx.fillStyle = "#fff"; sx.font = "600 31px Inter, system-ui, sans-serif"; sx.fillText("Client meeting, 1:30", 62, 494);
+      sx.restore();
+    };
+    drawScreen(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { drawScreen(); stex.needsUpdate = true; });
+    var stex = new THREE.CanvasTexture(sc); stex.colorSpace = THREE.SRGBColorSpace;
+    var screenM = new THREE.Mesh(new THREE.PlaneGeometry(PW - 0.36, PH - 0.36), new THREE.MeshBasicMaterial({ map: stex, transparent: true }));
+    screenM.position.z = PD / 2 + 0.005; phone.add(screenM);
+    var glassTop = new THREE.Mesh(new THREE.PlaneGeometry(PW - 0.36, PH - 0.36), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.08, roughness: 0.05, clearcoat: 1, envMapIntensity: 1.4 }));
+    glassTop.position.z = PD / 2 + 0.012; phone.add(glassTop);
+    phone.rotation.set(-0.08, -0.32, 0); phone.visible = false;
 
     /* The floor only shows the shadow, plus a warm glow where light passes through the glass. */
     var floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({ opacity: dark ? 0.45 : 0.2 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
@@ -221,11 +250,14 @@
       st.yaw += (st.yawT - st.yaw) * Math.min(1, dt * 8); st.pitch += (st.pitchT - st.pitch) * Math.min(1, dt * 6);
       root.rotation.y = st.yaw + (1 - rv) * 1.4; root.scale.setScalar(0.92 + 0.08 * rv);
       st.zoom += ((st.ch === 2 ? 1.04 : 1) - st.zoom) * Math.min(1, dt * 2); st.lift += ((st.ch === 2 ? 3.4 : 0) - st.lift) * Math.min(1, dt * 2);
+      /* Chapter 4: the phone slides in beside the bottle and the camera pulls back to fit both. */
+      st.pk += ((st.ch === 3 ? 1 : 0) - st.pk) * Math.min(1, dt * (still ? 99 : 2.2)); var pk = ease(clamp(st.pk));
+      phone.visible = pk > 0.01; phone.position.set(6.4 + (1 - pk) * 9, PH / 2 * Math.cos(0.08) + 0.02, -0.6);
       var wide = stage.classList.contains("wide") || aspect > 1.3;
       if (vw !== cv.width) { vw = cv.width; if (wide) cam.setViewOffset(cv.width, cv.height, -cv.width * 0.2, 0, cv.width, cv.height); else cam.clearViewOffset(); cam.updateProjectionMatrix(); }
       var free = st.ch === 2 ? 0 : 1;
-      var cy = 4.25 + o * 1.1 * free + st.lift, dist = (wide ? 20 : 19) + o * 3.5 * free; dist = (dist) * st.zoom * (aspect < 0.85 ? 0.85 / aspect : 1);
-      cam.position.set(0, cy + Math.sin(st.pitch) * dist, Math.cos(st.pitch) * dist); cam.lookAt(0, cy, 0);
+      var cy = 4.25 + o * 1.1 * free + st.lift, dist = (wide ? 20 : 19) + o * 3.5 * free; dist = (dist) * st.zoom * (aspect < 0.85 ? 0.85 / aspect : 1) * (1 + (wide ? 0.82 : 0.62) * pk); cy += (wide ? 3.5 : 2.9) * pk; var cx = 3.6 * pk;
+      cam.position.set(cx, cy + Math.sin(st.pitch) * dist, Math.cos(st.pitch) * dist); cam.lookAt(cx, cy, 0);
       renderer.render(scene, cam);
       if (!shown) { shown = true; has3d = true; stage.classList.add("is-3d"); }
       if (visible && !document.hidden) raf = requestAnimationFrame(frame);
